@@ -1,4 +1,4 @@
 # Go
 
 Hi Everyone.
-Create a simple Golang server using the Standard library. 
+Created a simple Golang server using the Standard library. 
