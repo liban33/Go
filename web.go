@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func handlerFunc(w http.ResponseWriter, r *http.Request) {
@@ -14,11 +16,24 @@ func handlerFunc(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.WriteHeader(http.StatusNotFound)
 		fmt.Fprint(w, "<h1>we could not find your page</h1><p>please email us if you keep being sent to an invalid page.</p>")
+
 	}
 }
 
+func home(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-Type", "text/html")
+	fmt.Fprint(w, "<h1>Welcome to my website</h1>")
+}
+func contact(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-Type", "text/Html")
+	fmt.Fprint(w, "Get in touch, send an email to <a href=\"mailto:liban_jama@hotmail.com\">liban_jama@hotmail.com</>.")
+}
+
 func main() {
-	http.HandleFunc("/", handlerFunc)
-	http.ListenAndServe(":7000", nil)
+	r := mux.NewRouter()
+	r.HandleFunc("/", home)
+	r.HandleFunc("/contact", contact)
+	//http.HandleFunc("/contact", handlerFunc)
+	http.ListenAndServe(":7000", r)
 
 }
