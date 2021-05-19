@@ -40,5 +40,5 @@ func main() {
 	r.HandleFunc("/faq", faq)
 	//http.HandleFunc("/contact", handlerFunc)
 	http.ListenAndServe(":7000", r)
-
 }
+
